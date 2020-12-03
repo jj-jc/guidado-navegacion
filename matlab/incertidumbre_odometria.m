@@ -35,6 +35,13 @@ legend('Posicion odometria','Posicion real')
 
 % 5) Se calculan las medias y varianzas de cada variable de la odometría
 error = abs(posicion_odometria - pos_real); % Matriz de errores absolutos entre odometría y posición real
+error(:,3) = mod(error(:,3),pi);
+for i = 1:length(error)
+    if(error(i,3) > 3)
+        error(i,3) = abs(error(i,3)-pi);
+    end
+end
+
 media = mean(error); % Se obtiene la media del error para cada columna 
 desviacion_estandar = std(error); % Se obtiene la desviacion estandar del error para cada columna
 var_x = (desviacion_estandar(1))^2;
