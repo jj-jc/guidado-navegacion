@@ -14,7 +14,7 @@ apoloUpdate();
 
 % Se mide varias veces con los ultrasonidos
 dist_ultrasonidos = apoloGetAllultrasonicSensors('Pioneer3AT');
-for i = 1:1000
+for i = 1:3000
     dist_ultrasonidos = [dist_ultrasonidos; apoloGetAllultrasonicSensors('Pioneer3AT')];
     apoloUpdate();
 end
@@ -49,7 +49,7 @@ disp(' ')
 medida_laser = apoloGetLaserLandMarks('LMS100');
 distancias = medida_laser.distance;
 angulos = medida_laser.angle;
-for i = 1:1000
+for i = 1:3000
     medida_laser = apoloGetLaserLandMarks('LMS100');
     distancias = [distancias; medida_laser.distance];
     angulos = [angulos; medida_laser.angle];

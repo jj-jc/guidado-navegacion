@@ -22,7 +22,7 @@ for i = 1:3000
     posicion_odometria = [posicion_odometria; pos_odometria]; 
     % Se almacenan en 'pos_real' todos los datos de la posicion real del robot
     pos_actual = apoloGetLocationMRobot('Pioneer3AT');
-    pos_real = [pos_real; pos_actual(1),pos_actual(2),pos_actual(4)];
+    pos_real = [pos_real; pos_actual(1),pos_actual(2),-pos_actual(4)];
 end
 
 % 4) Se dibuja el recorrido real y el de la odometria
