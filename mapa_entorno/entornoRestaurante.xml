@@ -465,13 +465,45 @@
             <colour r="1" g="0" b="0"/>
         </UltrasonicSensor>
 
-        <!-- Definición de 2 balizas -->
+        <!-- Definición de balizas -->
 	    <LandMark  name="LM1" mark_id="1">
-		    <position> {-3.9,0,0.4}	</position>
+		    <position> {-3.9,-3,0.4}	</position>
 	    </LandMark>
 	
 	    <LandMark  name="LM2" mark_id="2">
-		    <position> {5,7.9,0.4} </position>
+		    <position> {4,7.9,0.4} </position>
+	    </LandMark>
+
+        <LandMark  name="LM3" mark_id="3">
+		    <position> {4,-7.9,0.4} </position>
+	    </LandMark>
+
+        <LandMark  name="LM4" mark_id="4">
+		    <position> {4,0.1,0.4} </position>
+	    </LandMark>
+
+        <LandMark  name="LM5" mark_id="5">
+		    <position> {4,-0.1,0.4} </position>
+	    </LandMark>
+
+        <LandMark  name="LM6" mark_id="6">
+		    <position> {-3.9,7.9,0.4} </position>
+	    </LandMark>
+
+        <LandMark  name="LM7" mark_id="7">
+		    <position> {-3.9,-7.9,0.4} </position>
+	    </LandMark>
+
+        <LandMark  name="LM8" mark_id="8">
+		    <position> {-3.9,3,0.4} </position>
+	    </LandMark>
+
+        <LandMark  name="LM9" mark_id="9">
+		    <position> {7.9,-0.1,0.4} </position>
+	    </LandMark>
+
+        <LandMark  name="LM10" mark_id="10">
+		    <position> {7.9,0.1,0.4} </position>
 	    </LandMark>
 
 	</World>
