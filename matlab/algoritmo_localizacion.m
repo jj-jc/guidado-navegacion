@@ -61,17 +61,17 @@
             % Del estado
             X_k = apoloGetOdometry('Pioneer3AT');
             % De la Medida
-            Zk_ = [-X_k(3)+pi/2+atan2(LM_xy(1,laser.id(1))-X_k(1),LM_xy(2,laser.id(1)));
-                   -X_k(3)+pi/2+atan2(LM_xy(1,laser.id(2))-X_k(1),LM_xy(2,laser.id(2)));
-                   -X_k(3)+pi/2+atan2(LM_xy(1,laser.id(1))-X_k(2),LM_xy(2,laser.id(2)))];
+            Zk_ = [-X_k(3)+pi/2+atan2(LM_xy(laser.id(1),1)-X_k(1),LM_xy(laser.id(1),2));
+                   -X_k(3)+pi/2+atan2(LM_xy(laser.id(2),1)-X_k(1),LM_xy(laser.id(2),2));
+                   -X_k(3)+pi/2+atan2(LM_xy(laser.id(3),1)-X_k(1),LM_xy(laser.id(3),2))];
                
         % Etapa 2: Observación
         Zk = [laser.angle(1);
               laser.angle(2);
               laser.angle(3)];
-        Hk = [((t1y-X_k(2))/((t1x-X_k(1))^2+(t1y-X_k(2))^2)) (-(t1x-X_k(1))/((t1x-X_k(1))^2+(t1y-X_k(2))^2)) (-1);
-          ((t2y-X_k(2))/((t2x-X_k(1))^2+(t2y-X_k(2))^2)) (-(t2x-X_k(1))/((t2x-X_k(1))^2+(t2y-X_k(2))^2)) (-1);   
-          ((t3y-X_k(2))/((t3x-X_k(1))^2+(t3y-X_k(2))^2)) (-(t3x-X_k(1))/((t3x-X_k(1))^2+(t3y-X_k(2))^2)) (-1)];
+        Hk = [((LM_xy(laser.id(1),2)-X_k(2))/((LM_xy(laser.id(1),1)-X_k(1))^2+(LM_xy(laser.id(1),2)-X_k(2))^2)) (-(LM_xy(laser.id(1),1)-X_k(1))/((LM_xy(laser.id(1),1)-X_k(1))^2+(LM_xy(laser.id(1),2)-X_k(2))^2)) (-1);
+              ((LM_xy(laser.id(2),2)-X_k(2))/((LM_xy(laser.id(2),1)-X_k(1))^2+(LM_xy(laser.id(2),2)-X_k(2))^2)) (-(LM_xy(laser.id(2),1)-X_k(1))/((LM_xy(laser.id(2),1)-X_k(1))^2+(LM_xy(laser.id(2),2)-X_k(2))^2)) (-1);   
+              ((LM_xy(laser.id(3),2)-X_k(2))/((LM_xy(laser.id(3),1)-X_k(1))^2+(LM_xy(laser.id(3),2)-X_k(2))^2)) (-(LM_xy(laser.id(3),1)-X_k(1))/((LM_xy(laser.id(3),1)-X_k(1))^2+(LM_xy(laser.id(3),2)-X_k(2))^2)) (-1)];
         
         % Etapa 3: Comparación de la predicción con observación
         Yk = Zk-Zk_;
@@ -83,8 +83,8 @@
                 Yk(r) = Yk(r) + 2*pi;
             end
         end
-        Sk = Hk*P_k*transpose(Hk) + Rk;
-        Wk = P_k*transpose(Hk)*inv(Sk);
+        Sk = Hk*P_k*((Hk)') + Rk;
+        Wk = P_k*((Hk)')*inv(Sk);
         
         % Etapa 4: Correccion
         Xk = X_k + Wk*Yk;
