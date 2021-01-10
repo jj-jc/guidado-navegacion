@@ -54,7 +54,7 @@ for l = 1:length(trayectoriaD)
     Xrealk(2) = XrealkAUX(2) + trayectoriaD(l)*sin(XrealkAUX(3)+(trayectoriaB(l)/2));
     Xrealk(3) = XrealkAUX(3) + trayectoriaB(l);
     Xreal(:,l) = Xrealk;  % Para mantener una historia del recorrido
-
+    
     % Observacion de las balizas
     Zk = [(atan2(t1y-Xrealk(2),t1x-Xrealk(1)) - Xrealk(3) + sqrt(R1)*randn);
           (atan2(t2y-Xrealk(2),t2x-Xrealk(1)) - Xrealk(3) + sqrt(R2)*randn);
@@ -78,6 +78,7 @@ for l = 1:length(trayectoriaD)
           (sin(Xk_1(3)+Uk(2)/2)) (0.5*Uk(1)*cos(Xk_1(3)+Uk(2)/2));
            0                     1                                 ];
     P_k = Ak*Pk_1*((Ak)') + Bk*Qk_1*((Bk)');
+    
 
     % Prediccion de la medida
     Zk_ = [(atan2(t1y-X_k(2),t1x-X_k(1)) - X_k(3));
