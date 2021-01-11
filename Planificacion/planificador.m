@@ -15,32 +15,35 @@ map = binaryOccupancyMap(mapaOccupancy,16.375);
 
 %Para tener en cuenta el ancho del robot y evitar colisiones,
 %se engordan los obstáculos en función de dicho ancho
-robotwidth = 0.35;
+robotwidth = 0.497;
 inflate(map, robotwidth/2); 
 
-%First, a a state space with states[x, y, theta] is generated
+%Primero se genera un espacio de estados[x, y, theta]
 ss = stateSpaceSE2; 
 
-%Creates validator that checks the occupancy map for collision detection
+%Se crea un validador que compruebas las colisiones del robot en el mapa
 sv = validatorOccupancyMap(ss); 
 
-%Loads the map into the validator
+%Carga el mapa en el validador
 sv.Map = map; 
 
-%Sets the interval of distance for collision detection. 
-%This determins the accuracy of the collision detection.
+%Se especifica los intervalos de distancia utilizados para la detección de
+%las colisiones. Cuanto menor sea, más tardará en ejecutarse el algoritmo
+%pero mayor precisión tendrá
 sv.ValidationDistance = 0.001; 
 
-%Sets the room limits
+%Se establecen los límites del entorno
 ss.StateBounds = [map.XWorldLimits;map.YWorldLimits; [-pi pi]]; 
 
-%Creates an RRT planner using the state space and the validator
+%Se crea un planificador utilizando el algoritmo RRT al que se pasa el
+%validador y el espacio de estados
 planner = plannerRRT(ss,sv);   
 
-%Sets the maximum distance between the nodes of the tree
+%Se establece la distancia máxima entre dos nodos del árbol
 planner.MaxConnectionDistance = 0.2;
 planner.GoalReachedFcn = @maxErrorPlanner;
-%Generates the path using an RRT algorithm between the start and the goal
+
+%Se genera la trayectoria utilizando el algoritmo RRT
 [path,tree] = plan(planner,inicio_mapa,fin_mapa);
 arbol= tree.TreeData;
 trayectoria = path.States;

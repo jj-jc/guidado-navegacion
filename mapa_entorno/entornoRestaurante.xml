@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 
 <!-- Autores del documento
-        Álvaro Benito Oliva (M2159)
+        Álvaro Benito Oliva (M20159)
         Germán Andrés Di Fonzo Caturegli (M20037)
         Juan José Jurado Camino (M20039) -->
 
@@ -88,8 +88,8 @@
             <face>
                 <!-- Vértices definidos a partir de un nuevo sistema de referencia situado en el "Vértice 4" del suelo -->
                 <vertex>
-                    {0.000000 , 0.000000, 0}
-                    {0.000000 , 3.000000, 0}
+                    {1.500000 , 0.000000, 0}
+                    {1.500000 , 3.000000, 0}
                     {8.000000 , 3.000000, 0}
                     {8.000000 , 0.000000, 0}
                 </vertex>
