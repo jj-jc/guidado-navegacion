@@ -1,3 +1,4 @@
+clc,clear
 % Definimos una trayectoria circular
 velocidadL = 0.2;  % Velocidad lineal 0.2 m/seg
 timestep = 0.5;  % Actualizacion de sensores
@@ -45,23 +46,31 @@ t3y = 3;
 
 % Algoritmo
 Ktotal = zeros(3);      
-for l = 1:length(trayectoriaD)
+for i = 1:length(trayectoriaD)
     % Solo para el simulador
     XrealkAUX = Xrealk;
     
     % Avance real del robot
+<<<<<<< HEAD
+    Xrealk(1) = XrealkAUX(1) + trayectoriaD(i)*cos(XrealkAUX(3)+(trayectoriaB(i)/2));
+    Xrealk(2) = XrealkAUX(2) + trayectoriaD(i)*sin(XrealkAUX(3)+(trayectoriaB(i)/2));
+    Xrealk(3) = XrealkAUX(3) + trayectoriaB(i);
+    Xreal(:,i) = Xrealk;  % Para mantener una historia del recorrido
+
+=======
     Xrealk(1) = XrealkAUX(1) + trayectoriaD(l)*cos(XrealkAUX(3)+(trayectoriaB(l)/2));
     Xrealk(2) = XrealkAUX(2) + trayectoriaD(l)*sin(XrealkAUX(3)+(trayectoriaB(l)/2));
     Xrealk(3) = XrealkAUX(3) + trayectoriaB(l);
     Xreal(:,l) = Xrealk;  % Para mantener una historia del recorrido
     
+>>>>>>> ac53b2de440325c3ad877c3c75796e87a816263f
     % Observacion de las balizas
     Zk = [(atan2(t1y-Xrealk(2),t1x-Xrealk(1)) - Xrealk(3) + sqrt(R1)*randn);
           (atan2(t2y-Xrealk(2),t2x-Xrealk(1)) - Xrealk(3) + sqrt(R2)*randn);
           (atan2(t3y-Xrealk(2),t3x-Xrealk(1)) - Xrealk(3) + sqrt(R3)*randn)];
           
     % Para acortar el nombre de la variable
-    Uk = [trayectoriaDRuido(l); trayectoriaBRuido(l)];
+    Uk = [trayectoriaDRuido(i); trayectoriaBRuido(i)];
 
     % Nuevo ciclo, k-1 = k.
     Xk_1 = Xk;
@@ -87,7 +96,7 @@ for l = 1:length(trayectoriaD)
     Hk = [((t1y-X_k(2))/((t1x-X_k(1))^2+(t1y-X_k(2))^2)) (-(t1x-X_k(1))/((t1x-X_k(1))^2+(t1y-X_k(2))^2)) (-1);
           ((t2y-X_k(2))/((t2x-X_k(1))^2+(t2y-X_k(2))^2)) (-(t2x-X_k(1))/((t2x-X_k(1))^2+(t2y-X_k(2))^2)) (-1);   
           ((t3y-X_k(2))/((t3x-X_k(1))^2+(t3y-X_k(2))^2)) (-(t3x-X_k(1))/((t3x-X_k(1))^2+(t3y-X_k(2))^2)) (-1)];
-
+    
     % Comparacion
     Yk = Zk-Zk_;
     for r=1:3
@@ -105,11 +114,11 @@ for l = 1:length(trayectoriaD)
     Xk = X_k + Wk*Yk;
     Pk = (eye(3)-Wk*Hk)*P_k;
     
-    %Sólo para almacenarlo
-    Xestimado(:,l) = Xk;
-    Pacumulado(1,l) = Pk(1,1);
-    Pacumulado(2,l) = Pk(2,2);
-    Pacumulado(3,l) = Pk(3,3);
+    % Sólo para almacenarlo
+    Xestimado(:,i) = Xk;
+    Pacumulado(1,i) = Pk(1,1);
+    Pacumulado(2,i) = Pk(2,2);
+    Pacumulado(3,i) = Pk(3,3);
 end 
 
 % Representacion grafica
@@ -172,7 +181,5 @@ plot(Pacumulado(3,:),'b');
 xlabel ('t (muestras)')
 ylabel ('Varianza \theta (rad2)')
 
-pause
-close all
-clear all
+
 
