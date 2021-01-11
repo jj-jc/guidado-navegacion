@@ -1,12 +1,24 @@
+<<<<<<< HEAD
+=======
+clc, clear
+>>>>>>> ac53b2de440325c3ad877c3c75796e87a816263f
 % Sistema de locomoción tipo diferencial
 
 % Determinación de la incertidumbre del modelo cinemático
 
+<<<<<<< HEAD
 % 1) Se coloca el robot en el origen de coordenadas del mundo
 apoloPlaceMRobot('Pioneer3AT',[0 0 0],0);
 apoloUpdate();
 posicion_real = apoloGetLocationMRobot('Pioneer3AT'); % Se calcula la pose actual
 pos_real =[posicion_real(1),posicion_real(2),posicion_real(4)]; 
+=======
+% 1) Se obtiene la posición actual del robot
+apoloPlaceMRobot('Pioneer3AT',[0.5 0.5 0],0.5);
+apoloUpdate();
+posicion_real = apoloGetLocationMRobot('Pioneer3AT')
+pos_real =[posicion_real(1),posicion_real(2),posicion_real(4)] % al parecer 'theta' y 'rz' tienen sentidos opuestos
+>>>>>>> ac53b2de440325c3ad877c3c75796e87a816263f
 
 % 2) Se establece como offset inicial de la odometría la posición actual
 apoloResetOdometry('Pioneer3AT');

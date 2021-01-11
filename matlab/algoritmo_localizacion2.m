@@ -94,23 +94,19 @@ for i = 1:500
                 
             % De la Medida
 
-            Zk_ = [-X_k(3)+pi/2+atan2(LM_xy(laser.id(1),1)-X_k(1),LM_xy(laser.id(1),2));
-                   -X_k(3)+pi/2+atan2(LM_xy(laser.id(2),1)-X_k(1),LM_xy(laser.id(2),2));
-                   -X_k(3)+pi/2+atan2(LM_xy(laser.id(3),1)-X_k(1),LM_xy(laser.id(3),2))];
-
-            Zk_ = [-X_k(3)+atan2(LM_xy(laser.id(1),2)-X_k(2),LM_xy(laser.id(1),1)-X_k(1));
-                   -X_k(3)+atan2(LM_xy(laser.id(2),2)-X_k(2),LM_xy(laser.id(2),1)-X_k(1));
-                   -X_k(3)+atan2(LM_xy(laser.id(3),2)-X_k(2),LM_xy(laser.id(3),1)-X_k(1))];
-
+            Zk_ = [atan2(LM_xy(laser.id(1),2)-X_k(2),LM_xy(laser.id(1),1)-X_k(1))-X_k(3);
+                   atan2(LM_xy(laser.id(2),2)-X_k(2),LM_xy(laser.id(2),1)-X_k(1))-X_k(3);
+                   ((LM_xy(laser.id(2),1)-X_k(1))/(atan2(LM_xy(laser.id(2),2)-X_k(2),LM_xy(laser.id(2),1))))];
+            
                
         % Etapa 2: Observación
         Zk = [laser.angle(1);
               laser.angle(2);
-              laser.angle(3)];
+              laser.distance(2)];
+          
         Hk = [((LM_xy(laser.id(1),2)-X_k(2))/((LM_xy(laser.id(1),1)-X_k(1))^2+(LM_xy(laser.id(1),2)-X_k(2))^2)) (-(LM_xy(laser.id(1),1)-X_k(1))/((LM_xy(laser.id(1),1)-X_k(1))^2+(LM_xy(laser.id(1),2)-X_k(2))^2)) (-1);
               ((LM_xy(laser.id(2),2)-X_k(2))/((LM_xy(laser.id(2),1)-X_k(1))^2+(LM_xy(laser.id(2),2)-X_k(2))^2)) (-(LM_xy(laser.id(2),1)-X_k(1))/((LM_xy(laser.id(2),1)-X_k(1))^2+(LM_xy(laser.id(2),2)-X_k(2))^2)) (-1);   
-              ((LM_xy(laser.id(3),2)-X_k(2))/((LM_xy(laser.id(3),1)-X_k(1))^2+(LM_xy(laser.id(3),2)-X_k(2))^2)) (-(LM_xy(laser.id(3),1)-X_k(1))/((LM_xy(laser.id(3),1)-X_k(1))^2+(LM_xy(laser.id(3),2)-X_k(2))^2)) (-1)];
-        
+              ((LM_xy(laser.id(2),2)-X_k(2))/(2*(LM_xy(laser.id(2),1)-X_k(1))*sqrt(1+abs((LM_xy(laser.id(2),2)-X_k(2))/(LM_xy(laser.id(2),1)-X_k(1)))))-(sqrt(1+abs((LM_xy(laser.id(2),2)-X_k(2))/(LM_xy(laser.id(2),1)-X_k(1)))))) (-(LM_xy(laser.id(2),1)-X_k(1))/(2*sqrt(1+abs((LM_xy(laser.id(2),2)-X_k(2))/(LM_xy(laser.id(2),1)-X_k(1)))))) (0)];
         % Etapa 3: Comparación de la predicción con observación
         Yk = Zk-Zk_;
         for r=1:3
@@ -136,68 +132,20 @@ for i = 1:500
 %         plot(Xestimado(:,1), Xestimado(:,2),'+');
 %         xlim([-8 8]);
 %         ylim([-8 8]);
-        Pacumulado(1,i) = Pk(1,1);
-        Pacumulado(2,i) = Pk(2,2);
-        Pacumulado(3,i) = Pk(3,3);
+        
        
     end
     
 end
 
-figure(1);
-subplot(2,2,1);
-plot(Xreal(:,1),Xreal(:,2),'.b','MarkerSize',2);
-xlabel('X (m)');
-ylabel('Y (m)');
+figure;
+
+plot(Xreal(:,1),Xreal(:,2),'b')
+xlabel('X (m)')
+ylabel('Y (m)')
 hold on;
-plot(Xestimado(:,1),Xestimado(:,2),'.r','MarkerSize',2);
-legend('Posicion real','Posicion estimada');
-
-subplot(2,2,2);
-plot(Xreal(:,1),'.b','MarkerSize',2);
-xlabel ('t (muestras)');
-ylabel ('X (m)');
-hold on;
-plot(Xestimado(:,1),'.r','MarkerSize',2);
-legend('Posicion real','Posicion estimada');
-
-subplot(2,2,3);
-plot(Xreal(:,2),'.b','MarkerSize',2);
-xlabel ('t (muestras)');
-ylabel ('Y (m)');
-hold on;
-plot(Xestimado(:,2),'.r','MarkerSize',2);
-legend('Posicion real','Posicion estimada');
-
-subplot(2,2,4);
-plot(Xreal(:,3),'.b','MarkerSize',2);
-xlabel ('t (muestras)');
-ylabel ('\theta (rad)');
-hold on;
-plot(Xestimado(:,3),'.r','MarkerSize',2);
-legend('Posicion real','Posicion estimada');
-
-
-
-figure(2);
-subplot(3,1,1);
-axis([0 12 0 9])
-plot(Pacumulado(1,:),'b','MarkerSize',2);
-xlabel ('t (muestras)')
-ylabel ('Varianza X (m2)')
-hold on
-
-subplot(3,1,2);
-axis([0 12 0 9])
-plot(Pacumulado(2,:),'b');
-xlabel ('t (muestras)')
-ylabel ('Varianza Y (m2)')
-
-subplot(3,1,3);
-axis([0 12 0 9])
-plot(Pacumulado(3,:),'b');
-xlabel ('t (muestras)')
-ylabel ('Varianza \theta (rad2)')
+plot(Xestimado(:,1),Xestimado(:,2),'r')
+legend('Posicion real (azul)','Posicion estimada (rojo)')
 
 % figure;
 % plot(Xreal(1,:),'b');

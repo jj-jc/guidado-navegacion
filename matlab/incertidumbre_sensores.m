@@ -7,7 +7,7 @@
 % Sensores utilizados: 3 ultrasonidos y 1 telémetro láser
 
 % Se coloca el robot mirando hacia la mesa principal
-apoloPlaceMRobot('Pioneer3AT',[-2 0 0],pi); 
+apoloPlaceMRobot('Pioneer3AT',[-2 0 0],pi+0.5); 
 apoloUpdate();
 
 % 1) Calibración de los ultrasonidos
@@ -38,9 +38,9 @@ disp(['Distancia media del ultrasonidos de la izquierda---> ', num2str(media(2))
 disp(['Distancia media del ultrasonidos de la derecha-----> ', num2str(media(3)),' metros'])
 disp(' ')
 disp('Varianza correspondiente a las medidas de cada ultrasonidos:')
-disp(['Varianza del ultrasonidos frontal-----------> ', num2str(var_us_frente),' metros'])
-disp(['Varianza del ultrasonidos de la izquierda---> ', num2str(var_us_izq),' metros'])
-disp(['Varianza del ultrasonidos de la derecha-----> ', num2str(var_us_dcha),' metros'])
+disp(['Varianza del ultrasonidos frontal-----------> ', num2str(var_us_frente)])
+disp(['Varianza del ultrasonidos de la izquierda---> ', num2str(var_us_izq)])
+disp(['Varianza del ultrasonidos de la derecha-----> ', num2str(var_us_dcha)])
 disp(' ')
 
 % 2) Calibración del telémetro láser
@@ -84,12 +84,12 @@ disp(['Angulo medio respecto a la baliza LM1----> ', num2str(media_ang(1)),' rad
 disp(['Ángulo medio respecto a la baliza LM2----> ', num2str(media_ang(2)),' rad'])
 disp(' ')
 disp('Varianza correspondiente a las medidas de distancias hechas por el laser:')
-disp(['Varianza de la medida de distancia a la baliza LM1-----> ', num2str(var_dist_LM1),' metros'])
-disp(['Varianza de la medida de distancia a la baliza LM2-----> ', num2str(var_dist_LM2),' metros'])
+disp(['Varianza de la medida de distancia a la baliza LM1-----> ', num2str(var_dist_LM1)])
+disp(['Varianza de la medida de distancia a la baliza LM2-----> ', num2str(var_dist_LM2)])
 disp(' ')
 disp('Varianza correspondiente a las medidas de ángulos hechas por el laser:')
-disp(['Varianza de la medida de ángulo a la baliza LM1-----> ', num2str(var_ang_LM1),' rad'])
-disp(['Varianza de la medida de ángulo a la baliza LM2-----> ', num2str(var_ang_LM2),' rad'])
+disp(['Varianza de la medida de ángulo a la baliza LM1-----> ', num2str(var_ang_LM1)])
+disp(['Varianza de la medida de ángulo a la baliza LM2-----> ', num2str(var_ang_LM2)])
 disp(' ')
 disp('-----------------------------------------------------------------------')
 

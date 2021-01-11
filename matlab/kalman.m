@@ -1,3 +1,4 @@
+clc,clear
 % Definimos una trayectoria circular
 velocidadL = 0.2;  % Velocidad lineal 0.2 m/seg
 timestep = 0.5;  % Actualizacion de sensores
@@ -50,11 +51,19 @@ for i = 1:length(trayectoriaD)
     XrealkAUX = Xrealk;
     
     % Avance real del robot
+<<<<<<< HEAD
     Xrealk(1) = XrealkAUX(1) + trayectoriaD(i)*cos(XrealkAUX(3)+(trayectoriaB(i)/2));
     Xrealk(2) = XrealkAUX(2) + trayectoriaD(i)*sin(XrealkAUX(3)+(trayectoriaB(i)/2));
     Xrealk(3) = XrealkAUX(3) + trayectoriaB(i);
     Xreal(:,i) = Xrealk;  % Para mantener una historia del recorrido
 
+=======
+    Xrealk(1) = XrealkAUX(1) + trayectoriaD(l)*cos(XrealkAUX(3)+(trayectoriaB(l)/2));
+    Xrealk(2) = XrealkAUX(2) + trayectoriaD(l)*sin(XrealkAUX(3)+(trayectoriaB(l)/2));
+    Xrealk(3) = XrealkAUX(3) + trayectoriaB(l);
+    Xreal(:,l) = Xrealk;  % Para mantener una historia del recorrido
+    
+>>>>>>> ac53b2de440325c3ad877c3c75796e87a816263f
     % Observacion de las balizas
     Zk = [(atan2(t1y-Xrealk(2),t1x-Xrealk(1)) - Xrealk(3) + sqrt(R1)*randn);
           (atan2(t2y-Xrealk(2),t2x-Xrealk(1)) - Xrealk(3) + sqrt(R2)*randn);
@@ -78,6 +87,7 @@ for i = 1:length(trayectoriaD)
           (sin(Xk_1(3)+Uk(2)/2)) (0.5*Uk(1)*cos(Xk_1(3)+Uk(2)/2));
            0                     1                                 ];
     P_k = Ak*Pk_1*((Ak)') + Bk*Qk_1*((Bk)');
+    
 
     % Prediccion de la medida
     Zk_ = [(atan2(t1y-X_k(2),t1x-X_k(1)) - X_k(3));
