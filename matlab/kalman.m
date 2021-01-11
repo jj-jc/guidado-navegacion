@@ -1,3 +1,4 @@
+clc,clear
 % Definimos una trayectoria circular
 velocidadL = 0.2;  % Velocidad lineal 0.2 m/seg
 timestep = 0.5;  % Actualizacion de sensores
@@ -172,7 +173,5 @@ plot(Pacumulado(3,:),'b');
 xlabel ('t (muestras)')
 ylabel ('Varianza \theta (rad2)')
 
-pause
-close all
-clear all
+
 
