@@ -1,28 +1,27 @@
-
 % Sistema de locomoción tipo diferencial
 
 % Determinación de la incertidumbre del modelo cinemático
 
-% 1) Se obtiene la posición actual del robot
-apoloPlaceMRobot('Pioneer3AT',[-2 0 0],0);
+% 1) Se coloca el robot en el origen de coordenadas del mundo
+apoloPlaceMRobot('Pioneer3AT',[0 0 0],0);
 apoloUpdate();
-posicion_real = apoloGetLocationMRobot('Pioneer3AT');
-pos_real =[posicion_real(1),posicion_real(2),-posicion_real(4)]; % al parecer 'theta' y 'rz' tienen sentidos opuestos
+posicion_real = apoloGetLocationMRobot('Pioneer3AT'); % Se calcula la pose actual
+pos_real =[posicion_real(1),posicion_real(2),posicion_real(4)]; 
 
 % 2) Se establece como offset inicial de la odometría la posición actual
-apoloResetOdometry('Pioneer3AT',pos_real);
-posicion_odometria = apoloGetOdometry('Pioneer3AT');
+apoloResetOdometry('Pioneer3AT');
+posicion_odometria = apoloGetOdometry('Pioneer3AT',pos_real);
 
 % 3) Se mueve el robot y se mide con la odometria
 for i = 1:3000
-    apoloMoveMRobot('Pioneer3AT',[0.1, 0.1], 0.1);
+    apoloMoveMRobot('Pioneer3AT',[0.5, 0.5], 0.1);
     apoloUpdate();
     % Se almacenan en 'posicion_odometria' todos los datos de la odometría
     pos_odometria = apoloGetOdometry('Pioneer3AT');
     posicion_odometria = [posicion_odometria; pos_odometria]; 
-    % Se almacenan en 'pos_real' todos los datos de la posicion real del robot
+    % Se almacenan en 'pos_real' todos los datos de la pose real del robot
     pos_actual = apoloGetLocationMRobot('Pioneer3AT');
-    pos_real = [pos_real; pos_actual(1),pos_actual(2),-pos_actual(4)];
+    pos_real = [pos_real; pos_actual(1),pos_actual(2),pos_actual(4)];
 end
 
 % 4) Se dibuja el recorrido real y el de la odometria
@@ -31,14 +30,14 @@ xlabel('X (m)')
 ylabel('Y (m)')
 hold on;
 plot(pos_real(:,1),pos_real(:,2),'r')
-legend('Posicion odometria','Posicion real')
+legend('Pose odometria (azul)','Pose real(rojo)')
 
-% 5) Se calculan las medias y varianzas de cada variable de la odometría
+% 5) Se calculan las medias y varianzas de cada error de las variables de la odometría
 error = abs(posicion_odometria - pos_real); % Matriz de errores absolutos entre odometría y posición real
 error(:,3) = mod(error(:,3),pi);
 for i = 1:length(error)
     if(error(i,3) > 3)
-        error(i,3) = abs(error(i,3)-pi);
+        error(i,3) = error(i,3)-pi;
     end
 end
 
