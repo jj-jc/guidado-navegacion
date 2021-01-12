@@ -94,10 +94,6 @@ for i = 1:500
                 
             % De la Medida
 
-            Zk_ = [-X_k(3)+pi/2+atan2(LM_xy(laser.id(1),1)-X_k(1),LM_xy(laser.id(1),2));
-                   -X_k(3)+pi/2+atan2(LM_xy(laser.id(2),1)-X_k(1),LM_xy(laser.id(2),2));
-                   -X_k(3)+pi/2+atan2(LM_xy(laser.id(3),1)-X_k(1),LM_xy(laser.id(3),2))];
-
             Zk_ = [-X_k(3)+atan2(LM_xy(laser.id(1),2)-X_k(2),LM_xy(laser.id(1),1)-X_k(1));
                    -X_k(3)+atan2(LM_xy(laser.id(2),2)-X_k(2),LM_xy(laser.id(2),1)-X_k(1));
                    -X_k(3)+atan2(LM_xy(laser.id(3),2)-X_k(2),LM_xy(laser.id(3),1)-X_k(1))];
