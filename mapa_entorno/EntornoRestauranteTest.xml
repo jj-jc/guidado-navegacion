@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<!-- Autores del documento
+        Álvaro Benito Oliva (M2159)
+        Germán Andrés Di Fonzo Caturegli (M20037)
+        Juan José Jurado Camino (M20039) -->
+
+<root>
+	<World>
+
+        <WorldInfo name="Trabajo Guiado y Navegacion de Robots. MUAR. UPM 2020">
+            <!-- Números de matrícula de los alumnos del trabajo -->
+			<RegisterNumber number="20159"/>
+			<RegisterNumber number="20037"/>
+            <RegisterNumber number="20039"/>
+		</WorldInfo>
+
+        <!-- Definición del suelo, las paredes y las mesas del reustaurante -->
+        <FaceSetPart name="Sala Cuadrada Restaurante 16x16">
+
+            <!-- Definición del suelo -->
+            <face>
+                <!-- Los vértices del suelo vienen definidos a partir del sistema de referencia inicial -->
+                <!-- Cada vértice del suelo será el origen de un nuevo sistema de referencia (rotado) para la definición de las paredes -->
+		        <vertex>
+			        {8.000000 , -8.000000, 0}   <!-- Vértice 1-->
+			        {8.000000 , 8.000000, 0}    <!-- Vértice 2-->
+			        {-8.000000 , 8.000000, 0}   <!-- Vértice 3-->
+			        {-8.000000 , -8.000000, 0}  <!-- Vértice 4-->
+		        </vertex>
+		        <colour r="1" g="1" b="1"/> <!-- Color madera -->
+	        </face>
+
+            <!-- Definición de las 4 paredes -->
+            <!-- Pared Frontal -->
+           <face>
+                <!-- Vértices definidos a partir de un nuevo sistema de referencia situado en el "Vértice 1" del suelo -->
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 3.000000, 0}
+                    {16.000000 , 3.000000, 0}
+                    {16.000000 , 0.000000, 0}
+                </vertex>
+                <orientation>{1.570796 , 0.000000, 1.570796}</orientation>  <!-- Rotación del sistema de referencia inicial (primero Z y despues X) -->
+                <position>{8.000000 , -8.000000, 0}</position>              <!-- Traslación del sistema de referencia inicial (se coloca en "Vértice 1" del suelo)-->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face> 
+            <!-- Pared Lateral Izquierda -->
+            <face>
+                <!-- Vértices definidos a partir de un nuevo sistema de referencia situado en el "Vértice 2" -->
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 3.000000, 0}
+                    {16.000000 , 3.000000, 0}
+                    {16.000000 , 0.000000, 0}
+                </vertex>
+                <orientation>{1.570796 , 0.000000, 3.141593}</orientation>  <!-- Rotación del sistema de referencia inicial (primero Z y despues X) -->
+                <position>{8.000000 , 8.000000, 0}</position>               <!-- Traslación del sistema de referencia inicial (se coloca en "Vértice 2" del suelo)-->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face>
+            <!-- Pared Trasera -->
+            <face>
+                <!-- Vértices definidos a partir de un nuevo sistema de referencia situado en el "Vértice 3" del suelo -->
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 3.000000, 0}
+                    {16.000000 , 3.000000, 0}
+                    {16.000000 , 0.000000, 0}
+                </vertex>
+                <orientation>{1.570796 , 0.000000, -1.570796}</orientation> <!-- Rotación del sistema de referencia inicial (primero Z y despues X) -->
+                <position>{-8.000000 , 8.000000, 0}</position>              <!-- Traslación del sistema de referencia inicial (se coloca en "Vértice 3" del suelo)-->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face>
+            <!-- Pared Lateral Derecha -->
+            <face>
+                <!-- Vértices definidos a partir de un nuevo sistema de referencia situado en el "Vértice 4" del suelo -->
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 3.000000, 0}
+                    {16.000000 , 3.000000, 0}
+                    {16.000000 , 0.000000, 0}
+                </vertex>
+                <orientation>{1.570796 , 0.000000, 0.000000}</orientation>  <!-- Rotación del sistema de referencia inicial (respecto X) -->
+                <position>{-8.000000 , -8.000000, 0}</position>             <!-- Traslación del sistema de referencia inicial (se coloca en "Vértice 4" del suelo)-->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face>
+            <!-- Pared situada en medio -->
+            <face>
+                <!-- Vértices definidos a partir de un nuevo sistema de referencia situado en el "Vértice 4" del suelo -->
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 3.000000, 0}
+                    {8.000000 , 3.000000, 0}
+                    {8.000000 , 0.000000, 0}
+                </vertex>
+                <orientation>{1.570796 , 0.000000, 0.000000}</orientation>  <!-- Rotación del sistema de referencia inicial (respecto X) -->
+                <position>{0.000000 , 0.000000, 0}</position>               <!-- No hay traslación del sistema de referencia inicial-->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face>
+            
+            <!-- Definición de las mesas del restaurante -->
+            <!-- Mesa 1 -->
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 1.000000, 0}
+                    {1.000000 , 1.000000, 0}
+                    {1.000000 , 0.000000, 0}
+                </vertex>
+                <orientation>{1.570796 , 0.000000, 0.000000}</orientation>  <!-- Rotación del sistema de referencia inicial (respecto X) -->
+                <position>{6.000000 , -7.000000, 0}</position>              <!-- Traslación del sistema de referencia inicial -->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face>
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 3.000000, 0}
+                    {1.000000 , 3.000000, 0}
+                    {1.000000 , 0.000000, 0}
+                </vertex>
+                <orientation>{0.000000 , 0.000000, 0.000000}</orientation>  <!-- No hay rotación en este caso -->
+                <position>{6.000000 , -7.000000, 1}</position>              <!-- Traslación del sistema de referencia inicial -->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face>
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 1.000000, 0}
+                    {1.000000 , 1.000000, 0}
+                    {1.000000 , 0.000000, 0}
+                </vertex>
+                <orientation>{1.570796 , 0.000000, 0.000000}</orientation>  <!-- Rotación del sistema de referencia inicial (respecto X) -->
+                <position>{6.000000 , -4.000000, 0}</position>              <!-- Traslación del sistema de referencia inicial -->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face>
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 1.000000, 0}
+                    {1.000000 , 1.000000, 0}
+                    {1.000000 , 0.000000, 0}
+                </vertex>
+                <orientation>{1.570796 , 0.000000, 0.000000}</orientation>  <!-- Rotación del sistema de referencia inicial (respecto X) -->
+                <position>{6.000000 , -5.500000, 0}</position>              <!-- Traslación del sistema de referencia inicial -->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face>
+
+            <!-- Mesa 2 -->
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 1.000000, 0}
+                    {1.000000 , 1.000000, 0}
+                    {1.000000 , 0.000000, 0}
+                </vertex>
+                <orientation>{1.570796 , 0.000000, 0.000000}</orientation>  <!-- Rotación del sistema de referencia inicial (respecto X) -->
+                <position>{2.500000 , -4.000000, 0}</position>              <!-- Traslación del sistema de referencia inicial -->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face>
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 3.00000, 0}
+                    {1.000000 , 3.00000, 0}
+                    {1.000000 , 0.000000, 0}
+                </vertex>
+                <orientation>{0.000000 , 0.000000, 0.000000}</orientation> <!-- No hay rotación en este caso -->
+                <position>{2.50000 , -4.000000, 1}</position>              <!-- Traslación del sistema de referencia inicial -->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face>
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 1.000000, 0}
+                    {1.000000 , 1.000000, 0}
+                    {1.000000 , 0.000000, 0}
+                </vertex>
+                <orientation>{1.570796 , 0.000000, 0.000000}</orientation> <!-- Rotación del sistema de referencia inicial (respecto X) -->
+                <position>{2.500000 , -1.00000, 0}</position>              <!-- Traslación del sistema de referencia inicial -->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face>
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 1.000000, 0}
+                    {1.000000 , 1.000000, 0}
+                    {1.000000 , 0.000000, 0}
+                </vertex>
+                <orientation>{1.570796 , 0.000000, 0.000000}</orientation>  <!-- Rotación del sistema de referencia inicial (respecto X) -->
+                <position>{2.500000 , -2.500000, 0}</position>              <!-- Traslación del sistema de referencia inicial -->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face>
+
+            <!-- Mesa 3 -->
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 1.000000, 0}
+                    {1.000000 , 1.000000, 0}
+                    {1.000000 , 0.000000, 0}
+                </vertex>
+                <orientation>{1.570796 , 0.000000, 0.000000}</orientation>  <!-- Rotación del sistema de referencia inicial (respecto X) -->
+                <position>{-1.000000 , -7.000000, 0}</position>             <!-- Traslación del sistema de referencia inicial -->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face>
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 3.000000, 0}
+                    {1.000000 , 3.000000, 0}
+                    {1.000000 , 0.000000, 0}
+                </vertex>
+                <orientation>{0.000000 , 0.000000, 0.000000}</orientation>  <!-- No hay rotación en este caso -->
+                <position>{-1.000000 , -7.000000, 1}</position>             <!-- Traslación del sistema de referencia inicial -->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face>
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 1.000000, 0}
+                    {1.000000 , 1.000000, 0}
+                    {1.000000 , 0.000000, 0}
+                </vertex>
+                <orientation>{1.570796 , 0.000000, 0.000000}</orientation>  <!-- Rotación del sistema de referencia inicial (respecto X) -->
+                <position>{-1.000000 , -4.000000, 0}</position>             <!-- Traslación del sistema de referencia inicial -->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face>
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 1.000000, 0}
+                    {1.000000 , 1.000000, 0}
+                    {1.000000 , 0.000000, 0}
+                </vertex>
+                <orientation>{1.570796 , 0.000000, 0.000000}</orientation>   <!-- Rotación del sistema de referencia inicial (respecto X) -->
+                <position>{-1.000000 , -5.500000, 0}</position>              <!-- Traslación del sistema de referencia inicial -->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face>
+
+            <!-- Mesa 4 -->
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 1.000000, 0}
+                    {1.000000 , 1.000000, 0}
+                    {1.000000 , 0.000000, 0}
+                </vertex>
+                <orientation>{1.570796 , 0.000000, 0.000000}</orientation>  <!-- Rotación del sistema de referencia inicial (respecto X) -->
+                <position>{6.000000 , 4.000000, 0}</position>               <!-- Traslación del sistema de referencia inicial -->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face>
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 3.000000, 0}
+                    {1.000000 , 3.000000, 0}
+                    {1.000000 , 0.000000, 0}
+                </vertex>
+                <orientation>{0.000000 , 0.000000, 0.000000}</orientation>  <!-- No hay rotación en este caso -->
+                <position>{6.000000 , 4.000000, 1}</position>               <!-- Traslación del sistema de referencia inicial -->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face>
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 1.000000, 0}
+                    {1.000000 , 1.000000, 0}
+                    {1.000000 , 0.000000, 0}
+                </vertex>
+                <orientation>{1.570796 , 0.000000, 0.000000}</orientation>  <!-- Rotación del sistema de referencia inicial (respecto X) -->
+                <position>{6.000000 , 7.000000, 0}</position>               <!-- Traslación del sistema de referencia inicial -->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face>
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 1.000000, 0}
+                    {1.000000 , 1.000000, 0}
+                    {1.000000 , 0.000000, 0}
+                </vertex>
+                <orientation>{1.570796 , 0.000000, 0.000000}</orientation>  <!-- Rotación del sistema de referencia inicial (respecto X) -->
+                <position>{6.000000 , 5.500000, 0}</position>               <!-- Traslación del sistema de referencia inicial -->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face>
+
+            <!-- Mesa 5 -->
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 1.000000, 0}
+                    {1.000000 , 1.000000, 0}
+                    {1.000000 , 0.000000, 0}
+                </vertex>
+                <orientation>{1.570796 , 0.000000, 0.000000}</orientation>  <!-- Rotación del sistema de referencia inicial (respecto X) -->
+                <position>{2.500000 , 1.000000, 0}</position>               <!-- Traslación del sistema de referencia inicial -->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face>
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 3.00000, 0}
+                    {1.000000 , 3.00000, 0}
+                    {1.000000 , 0.000000, 0}
+                </vertex>
+                <orientation>{0.000000 , 0.000000, 0.000000}</orientation>  <!-- No hay rotación en este caso -->
+                <position>{2.50000 , 1.000000, 1}</position>                <!-- Traslación del sistema de referencia inicial -->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face>
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 1.000000, 0}
+                    {1.000000 , 1.000000, 0}
+                    {1.000000 , 0.000000, 0}
+                </vertex>
+                <orientation>{1.570796 , 0.000000, 0.000000}</orientation>  <!-- Rotación del sistema de referencia inicial (respecto X) -->
+                <position>{2.500000 , 4.00000, 0}</position>                <!-- Traslación del sistema de referencia inicial -->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face>
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 1.000000, 0}
+                    {1.000000 , 1.000000, 0}
+                    {1.000000 , 0.000000, 0}
+                </vertex>
+                <orientation>{1.570796 , 0.000000, 0.000000}</orientation>  <!-- Rotación del sistema de referencia inicial (respecto X) -->
+                <position>{2.500000 , 2.500000, 0}</position>              <!-- Traslación del sistema de referencia inicial -->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face>
+
+            <!-- Mesa 6 -->
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 1.000000, 0}
+                    {1.000000 , 1.000000, 0}
+                    {1.000000 , 0.000000, 0}
+                </vertex>
+                <orientation>{1.570796 , 0.000000, 0.000000}</orientation>  <!-- Rotación del sistema de referencia inicial (respecto X) -->
+                <position>{-1.000000 , 4.000000, 0}</position>              <!-- Traslación del sistema de referencia inicial -->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face>
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 3.000000, 0}
+                    {1.000000 , 3.000000, 0}
+                    {1.000000 , 0.000000, 0}
+                </vertex>
+                <orientation>{0.000000 , 0.000000, 0.000000}</orientation>  <!-- No hay rotación en este caso -->
+                <position>{-1.000000 , 4.000000, 1}</position>              <!-- Traslación del sistema de referencia inicial -->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face>
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 1.000000, 0}
+                    {1.000000 , 1.000000, 0}
+                    {1.000000 , 0.000000, 0}
+                </vertex>
+                <orientation>{1.570796 , 0.000000, 0.000000}</orientation>  <!-- Rotación del sistema de referencia inicial (respecto X) -->
+                <position>{-1.000000 , 7.000000, 0}</position>              <!-- Traslación del sistema de referencia inicial -->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face>
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 1.000000, 0}
+                    {1.000000 , 1.000000, 0}
+                    {1.000000 , 0.000000, 0}
+                </vertex>
+                <orientation>{1.570796 , 0.000000, 0.000000}</orientation>  <!-- Rotación del sistema de referencia inicial (respecto X) -->
+                <position>{-1.000000 , 5.500000, 0}</position>              <!-- Traslación del sistema de referencia inicial -->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face>
+
+            <!-- Mesa principal -->
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 1.000000, 0}
+                    {3.00000 , 1.000000, 0}
+                    {3.00000 , 0.000000, 0}
+                </vertex>
+                <orientation>{1.570796 , 0.000000, 0.000000}</orientation>   <!-- Rotación del sistema de referencia inicial (respecto X) -->
+                <position>{-7.000000 , -4.000000, 0}</position>              <!-- Traslación del sistema de referencia inicial -->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face>
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 8.000000, 0}
+                    {3.00000 , 8.000000, 0}
+                    {3.00000 , 0.000000, 0}
+                </vertex>
+                <orientation>{0.000000 , 0.000000, 0.000000}</orientation>   <!-- No hay rotación en este caso -->
+                <position>{-7.000000 , -4.000000, 1}</position>              <!-- Traslación del sistema de referencia inicial -->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face>
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 1.000000, 0}
+                    {3.000000 , 1.000000, 0}
+                    {3.000000 , 0.000000, 0}
+                </vertex>
+                <orientation>{1.570796 , 0.000000, 0.000000}</orientation>  <!-- Rotación del sistema de referencia inicial (respecto X) -->
+                <position>{-7.000000 , 4.000000, 0}</position>              <!-- Traslación del sistema de referencia inicial -->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face>
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 8.000000, 0}
+                    {1.00000 , 8.000000, 0}
+                    {1.00000 , 0.000000, 0}
+                </vertex>
+                <orientation>{0.000000 , -1.570796, 0.000000}</orientation>  <!-- Rotación del sistema de referencia inicial (respecto Y) -->
+                <position>{-7.000000 , -4.000000, 0}</position>              <!-- Traslación del sistema de referencia inicial -->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face>
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 8.000000, 0}
+                    {1.00000 , 8.000000, 0}
+                    {1.00000 , 0.000000, 0}
+                </vertex>
+                <orientation>{0.000000 , -1.570796, 0.000000}</orientation>  <!-- Rotación del sistema de referencia inicial (respecto Y) -->
+                <position>{-4.00000 , -4.000000, 0}</position>              <!-- Traslación del sistema de referencia inicial -->
+                <colour r="0.2" g="0.2" b="0.8"/>
+            </face>
+
+
+            <!--Obstáculo-->
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 1.000000, 0}
+                    {1.00000 , 1.000000, 0}
+                    {1.00000 , 0.000000, 0}
+                </vertex>
+                <orientation>{1.570796 , 0.000000, 0.000000}</orientation>   <!-- Rotación del sistema de referencia inicial (respecto X) -->
+                <position>{-2.000000 , -2.000000, 0}</position>              <!-- Traslación del sistema de referencia inicial -->
+                <colour r="1" g="0" b="0"/>
+            </face>
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 1.000000, 0}
+                    {1.00000 , 1.000000, 0}
+                    {1.00000 , 0.000000, 0}
+                </vertex>
+                <orientation>{0.000000 , 0.000000, 0.000000}</orientation>   <!-- No hay rotación en este caso -->
+                <position>{-2.000000 , -2.000000, 1}</position>              <!-- Traslación del sistema de referencia inicial -->
+                <colour r="1" g="0" b="0"/>
+            </face>
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 1.000000, 0}
+                    {1.000000 , 1.000000, 0}
+                    {1.000000 , 0.000000, 0}
+                </vertex>
+                <orientation>{1.570796 , 0.000000, 0.000000}</orientation>  <!-- Rotación del sistema de referencia inicial (respecto X) -->
+                <position>{-2.000000 , -1.000000, 0}</position>              <!-- Traslación del sistema de referencia inicial -->
+                <colour r="1" g="0" b="0"/>
+            </face>
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 1.000000, 0}
+                    {1.00000 , 1.000000, 0}
+                    {1.00000 , 0.000000, 0}
+                </vertex>
+                <orientation>{0.000000 , -1.570796, 0.000000}</orientation>  <!-- Rotación del sistema de referencia inicial (respecto Y) -->
+                <position>{-2.000000 , -2.000000, 0}</position>              <!-- Traslación del sistema de referencia inicial -->
+                <colour r="1" g="0" b="0"/>
+            </face>
+            <face>
+                <vertex>
+                    {0.000000 , 0.000000, 0}
+                    {0.000000 , 1.000000, 0}
+                    {1.00000 , 1.000000, 0}
+                    {1.00000 , 0.000000, 0}
+                </vertex>
+                <orientation>{0.000000 , -1.570796, 0.000000}</orientation>  <!-- Rotación del sistema de referencia inicial (respecto Y) -->
+                <position>{-1.00000 , -2.000000, 0}</position>              <!-- Traslación del sistema de referencia inicial -->
+                <colour r="1" g="0" b="0"/>
+            </face>
+
+
+        </FaceSetPart>
+
+        <!-- Definición de un robot Pioneer3at, posición y orientación inicial -->
+        <Pioneer3ATSim name="Pioneer3AT" id="1">
+            <orientation>	{0,0,0} </orientation>
+            <position>	{-2,0,0}	</position>
+        </Pioneer3ATSim>
+
+        <!-- Definición de un obstaculo, que hará las veces de obstáculo1 -->
+        <ComposedEntity name="" id="17">
+			<PrismaticPart name="obstaculo1" id="0">
+				<face>
+					<vertex>
+						{1,0,0}
+						{6.12323e-17,1,0}
+						{-1,-1.22465e-16,0}
+						{6.12323e-17,-1,0}
+					</vertex>
+				</face>
+			</PrismaticPart>
+			<position>
+				{3,5.5,0}
+			</position>
+		</ComposedEntity>
+
+        <!-- Definición de un robot Pioneer3at, que hará las veces de obstáculo3 -->
+        <Pioneer3ATSim name="Obstaculo3" id="2">
+            <orientation>	{0,0,0} </orientation>
+            <position>	{-2,5,0}	</position>
+        </Pioneer3ATSim>
+
+
+        <!-- Definición de un telémetro láser unido al robot, posición y orientación relativa -->	
+        <LMS100Sim name="LMS100" linkTo="$Pioneer3AT$">
+            <position>  {0.1,0,0.4} </position>
+            <colour r="1" g="0" b="0"/>
+        </LMS100Sim>
+
+        <!-- Definición de 3 ultrasonidos frontales unidos al robot, posición y orientación relativa -->		
+        <UltrasonicSensor name="frente1" linkTo="$Pioneer3AT$" conusAngle="0.5">
+            <orientation>	{0,-0.1,0}	</orientation>
+            <position>	{0.2,0,0.2}	</position>
+            <colour r="0" g="0" b="1"/>
+        </UltrasonicSensor>
+	
+        <UltrasonicSensor name="izquierda1" linkTo="$Pioneer3AT$" conusAngle="0.5">
+            <orientation>	{0,-0.1,0.7}    </orientation>
+            <position>	{0.18,0.11,0.2}	</position>
+            <colour r="0" g="1" b="0"/>
+        </UltrasonicSensor>
+	
+        <UltrasonicSensor name="derecha1" linkTo="$Pioneer3AT$" conusAngle="0.5">
+            <orientation>	{0,-0.1,-0.7}    </orientation>
+            <position>	{0.18,-0.11,0.2} </position>
+            <colour r="1" g="0" b="0"/>
+        </UltrasonicSensor>
+
+
+        <!-- Definición de 3 ultrasonidos frontales unidos al obstáculo3, posición y orientación relativa -->		
+        <UltrasonicSensor name="frente2" linkTo="$Obstaculo3$" conusAngle="0.5">
+            <orientation>	{0,-0.1,0}	</orientation>
+            <position>	{0.2,0,0.2}	</position>
+            <colour r="0" g="0" b="1"/>
+        </UltrasonicSensor>
+	
+        <UltrasonicSensor name="izquierda2" linkTo="$Obstaculo3$" conusAngle="0.5">
+            <orientation>	{0,-0.1,0.7}    </orientation>
+            <position>	{0.18,0.11,0.2}	</position>
+            <colour r="0" g="1" b="0"/>
+        </UltrasonicSensor>
+	
+        <UltrasonicSensor name="derecha2" linkTo="$Obstaculo3$" conusAngle="0.5">
+            <orientation>	{0,-0.1,-0.7}    </orientation>
+            <position>	{0.18,-0.11,0.2} </position>
+            <colour r="1" g="0" b="0"/>
+        </UltrasonicSensor>
+
+        <!-- Definición de balizas -->
+	    <LandMark  name="LM1" mark_id="1">
+		    <position> {-3.9,-3,0.4}	</position>
+	    </LandMark>
+	
+	    <LandMark  name="LM2" mark_id="2">
+		    <position> {4,7.9,0.4} </position>
+	    </LandMark>
+
+        <LandMark  name="LM3" mark_id="3">
+		    <position> {4,-7.9,0.4} </position>
+	    </LandMark>
+
+        <LandMark  name="LM4" mark_id="4">
+		    <position> {4,0.1,0.4} </position>
+	    </LandMark>
+
+        <LandMark  name="LM5" mark_id="5">
+		    <position> {4,-0.1,0.4} </position>
+	    </LandMark>
+
+        <LandMark  name="LM6" mark_id="6">
+		    <position> {-3.9,7.9,0.4} </position>
+	    </LandMark>
+
+        <LandMark  name="LM7" mark_id="7">
+		    <position> {-3.9,-7.9,0.4} </position>
+	    </LandMark>
+
+        <LandMark  name="LM8" mark_id="8">
+		    <position> {-3.9,3,0.4} </position>
+	    </LandMark>
+
+        <LandMark  name="LM9" mark_id="9">
+		    <position> {7.9,-0.1,0.4} </position>
+	    </LandMark>
+
+        <LandMark  name="LM10" mark_id="10">
+		    <position> {7.9,0.1,0.4} </position>
+	    </LandMark>
+
+	</World>
+</root>
