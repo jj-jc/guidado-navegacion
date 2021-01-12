@@ -20,7 +20,7 @@ tiempo = 0.1; % s
 
 % 4) Se declaran las matrices donde se almacena el giro y el avance en cada
 % iteración
-n = 300;
+n = 1000;
 avance_odometria = zeros(n,1);
 giro_odometria = zeros(n,1);
 avance_real = zeros(n,1);

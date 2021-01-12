@@ -7,7 +7,7 @@
 % Sensores utilizados: 3 ultrasonidos y 1 telémetro láser
 
 % Se coloca el robot mirando hacia la mesa principal
-apoloPlaceMRobot('Pioneer3AT',[-2 0 0],pi+0.5); 
+apoloPlaceMRobot('Pioneer3AT',[-2 0 0],pi); 
 apoloUpdate();
 
 % 1) Calibración de los ultrasonidos
