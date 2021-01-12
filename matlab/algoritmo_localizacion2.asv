@@ -116,7 +116,7 @@ for i = 1:500
          
         Hk = [((Dy1)/((Dx1)^2+(Dy1)^2)) (-(Dx1)/((Dx1)^2+(Dy1)^2)) (-1);
               ((Dy2)/((Dx2)^2+(Dy2)^2)) (-(Dx2)/((Dx2)^2+(Dy2)^2)) (-1);   
-              ((-Dy2)*(Fcos)*Fatan*(Dy2/(Dx2^2))/Fsin^2) (((-Fsin)-(Dy2*(Fcos)*Fatan*(-1/Dx2)))/Fsin^2) (0) ];
+              ((-Dy2)*(Fcos)*Fatan*(Dy2/(Dx2^2))/Fsin^2) (((-Fsin)-(Dy2*(Fcos)*Fatan*(-1/Dx2)))/Fsin^2) (-(Dy2*Fcos*2)/Fsin^2) ];
         % Etapa 3: Comparación de la predicción con observación
         Yk = Zk-Zk_;
         for r=1:3
