@@ -104,9 +104,12 @@ while(distanceError > maxError)
     
     pose = Xk
     
-    %Estimación de la velocidad con el controlador
-    [vl, va] = controller(pose);
-    
+    %Estimación de la velocidad   
+    [vl,va]=control_reactivo('izquierda1','frente1','derecha1');
+    if (vl==10)&&(va==10)
+        [vl, va] = controller(pose);
+    end
+
     %Corrección de la consigna de velocidad con el control reactivo
     %%%%%%%%%%%%%%%%%%%%%
     %%%%%%%%%%%%%%%%%%%%%

@@ -447,19 +447,19 @@
         </LMS100Sim>
 
         <!-- Definición de 3 ultrasonidos frontales unidos al robot, posición y orientación relativa -->		
-        <UltrasonicSensor name="frente" linkTo="$Pioneer3AT$" conusAngle="0.5">
+        <UltrasonicSensor name="frente1" linkTo="$Pioneer3AT$" conusAngle="0.5">
             <orientation>	{0,-0.1,0}	</orientation>
             <position>	{0.2,0,0.2}	</position>
             <colour r="0" g="0" b="1"/>
         </UltrasonicSensor>
 	
-        <UltrasonicSensor name="izquierda" linkTo="$Pioneer3AT$" conusAngle="0.5">
+        <UltrasonicSensor name="izquierda1" linkTo="$Pioneer3AT$" conusAngle="0.5">
             <orientation>	{0,-0.1,0.7}    </orientation>
             <position>	{0.18,0.11,0.2}	</position>
             <colour r="0" g="1" b="0"/>
         </UltrasonicSensor>
 	
-        <UltrasonicSensor name="derecha" linkTo="$Pioneer3AT$" conusAngle="0.5">
+        <UltrasonicSensor name="derecha1" linkTo="$Pioneer3AT$" conusAngle="0.5">
             <orientation>	{0,-0.1,-0.7}    </orientation>
             <position>	{0.18,-0.11,0.2} </position>
             <colour r="1" g="0" b="0"/>
