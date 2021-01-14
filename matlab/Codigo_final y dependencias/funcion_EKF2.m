@@ -1,4 +1,4 @@
-function [Xrealk,Xk,Pk]=funcion_EKF(velocidadL,velocidadA,tiempo,Xk_1,Pk_1)
+function [Xrealk,Xk,Pk]=funcion_EKF2(Xk_1,Pk_1)
 
     % Varianza del ruido del proceso
     var_avance = 1.8389e-06;
@@ -13,19 +13,19 @@ function [Xrealk,Xk,Pk]=funcion_EKF(velocidadL,velocidadA,tiempo,Xk_1,Pk_1)
     % Inicialización de matriz R 
     Rk = [var_ang 0 0;
           0 var_ang 0;
-          0 0 var_ang];
+          0 0 var_dist];
 
     % Posición de las balizas:
     LM_xy = [ -3.9 -3.0;    % LM1
                4.0  7.9;   % LM2
                4.0 -7.9;   % LM3
-               4.0  0.1;   % LM4
+               4.0  0.3;   % LM4
                4.0 -0.1;   % LM5
               -3.9  7.9;   % LM6
               -3.9 -7.9;   % LM7
               -3.9  3.0;   % LM8
                7.9 -0.1;   % LM9
-               7.9  0.1];  % LM10 
+               7.9  0.3];  % LM10 
 
 
 
@@ -33,8 +33,6 @@ function [Xrealk,Xk,Pk]=funcion_EKF(velocidadL,velocidadA,tiempo,Xk_1,Pk_1)
 
 
 % Se simula el avance del robot con Apolo
-    apoloMoveMRobot('Pioneer3AT',[velocidadL, velocidadA], tiempo);
-    apoloUpdate();
     pose = apoloGetLocationMRobot('Pioneer3AT');
     Xrealk = [pose(1) pose(2) pose(4)];
 %     Xreal(i,:) = Xrealk;
@@ -106,7 +104,7 @@ function [Xrealk,Xk,Pk]=funcion_EKF(velocidadL,velocidadA,tiempo,Xk_1,Pk_1)
                     Yk(r) = Yk(r) + 2*pi;
                 end
             end
-            Yk
+            Yk;
             Sk = Hk*P_k*((Hk)') + Rk;
             Wk = P_k*((Hk)')*inv(Sk);
 
@@ -115,7 +113,7 @@ function [Xrealk,Xk,Pk]=funcion_EKF(velocidadL,velocidadA,tiempo,Xk_1,Pk_1)
             Pk = (eye(3)-Wk*Hk)*P_k;
 %         end    
     else 
-        Xk=Xk_1;
+        Xk=X_k;
         Pk=Pk_1;
     end
     apoloResetOdometry('Pioneer3AT', [Xk(1) Xk(2) Xk(3)]);

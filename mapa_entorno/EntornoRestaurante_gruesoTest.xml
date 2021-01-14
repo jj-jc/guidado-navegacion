@@ -512,7 +512,7 @@
 
         <!-- Definición de un telémetro láser unido al robot, posición y orientación relativa -->	
         <LMS100Sim name="LMS100" linkTo="$Pioneer3AT$">
-            <position>  {0.1,0,0.4} </position>
+            <position>  {0,0,0.4} </position>
             <colour r="1" g="0" b="0"/>
         </LMS100Sim>
 

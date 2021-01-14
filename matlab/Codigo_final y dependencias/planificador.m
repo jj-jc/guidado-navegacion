@@ -16,7 +16,7 @@ map = binaryOccupancyMap(mapaOccupancy,16.375);
 %Para tener en cuenta el ancho del robot y evitar colisiones,
 %se engordan los obstáculos en función de dicho ancho
 robotwidth = 0.497;
-inflate(map, robotwidth/2); 
+inflate(map, robotwidth/1.6); 
 
 %Primero se genera un espacio de estados[x, y, theta]
 ss = stateSpaceSE2; 
