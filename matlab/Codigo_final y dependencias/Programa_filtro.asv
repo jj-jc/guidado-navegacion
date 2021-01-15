@@ -9,16 +9,12 @@ clear
 %x_fin = 6.5; y_fin = 2.7; theta_fin = pi/2;
 
 %Puntos Simulacion 2
-%x_ini = 6.5; y_ini = 2.7; theta_ini = pi;
-%x_fin = -6.5; y_fin = -6.5; theta_fin = pi/2;
+x_ini = 6.5; y_ini = 2.7; theta_ini = pi;
+x_fin = -6.5; y_fin = -6.5; theta_fin = pi/2;
 
 %Puntos Simulacion 3
-%x_ini = -6.5; y_ini = 6.5; theta_ini = 0;
-%x_fin = 6.5; y_fin = -2.7; theta_fin = 0;
-
-%Puntos Simulacion 4
-x_ini = -6.5; y_ini = -6.5; theta_ini = 0;
-x_fin = -6.5; y_fin = 6.5; theta_fin = pi;
+%x_ini = 6.5; y_ini = -2.7; theta_ini = pi;
+%x_fin = 6.5; y_fin = 2.7; theta_fin = pi/2;
 
 apoloPlaceMRobot('Pioneer3AT',[x_ini y_ini 0],theta_ini);
 apoloUpdate();
@@ -60,7 +56,7 @@ imagen = imread('RawMap.pgm'); %imagen del mapa
 
 % inicio = [-7.5,2.7, pi/2];
 inicio=[x_ini, y_ini, theta_ini];
-fin = [x_fin,y_fin, theta_fin];
+fin = [x_fin,y_fin, x_fin];
 
 %Generación de la trayectoria utilizando un algoritmo RRT
 [trayectoria, arbol, mapa] = planificador(imagen, inicio, fin);
@@ -151,5 +147,4 @@ end
 legend("Trayectoria planificada","Trayectoria estimada","Trayectoria real");
 xlabel("Y (m)");
 ylabel("X (m)");
-set(gca,'fontsize', 12);
-ylim([0.5, 7.5]);
+set(gca,'fontsize', 14);

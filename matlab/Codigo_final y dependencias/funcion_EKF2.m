@@ -1,14 +1,14 @@
 function [Xrealk,Xk,Pk]=funcion_EKF2(Xk_1,Pk_1)
 
     % Varianza del ruido del proceso
-    var_avance = 1.8389e-06;
-    var_giro = 2.1857e-07;
+    var_avance = 1.635e-06;
+    var_giro = 2.7059e-07;
     Qk = [var_avance 0;
                 0 var_giro];
 
     % Varianza en la medida (calibración del laser)
-    var_dist = 0.00028562;
-    var_ang = 0.0001961;
+    var_dist = 0.00028336;
+    var_ang = 0.00019857;
     
     % Inicialización de matriz R 
     Rk = [var_ang 0 0;
@@ -27,12 +27,7 @@ function [Xrealk,Xk,Pk]=funcion_EKF2(Xk_1,Pk_1)
                7.9 -0.1;   % LM9
                7.9  0.3];  % LM10 
 
-
-
-
-
-
-% Se simula el avance del robot con Apolo
+% Se obtiene la posicion real del robot
     pose = apoloGetLocationMRobot('Pioneer3AT');
     Xrealk = [pose(1) pose(2) pose(4)];
 %     Xreal(i,:) = Xrealk;
