@@ -107,9 +107,9 @@ distanceError = norm(planTray(1,:) - planTray(end,:));
 i = 1;
 %Hasta que no se llegue al destino, se ejecuta el controlador
 figure;
-pause(10);
+%pause(10);
 while(distanceError > maxError)
-    pause(0.02)
+    %pause(0.02)
     %Estimación de la pose con el filtro de Kalman
     Xk_1=Xk;
     Pk_1=Pk;
@@ -152,4 +152,4 @@ legend("Trayectoria planificada","Trayectoria estimada","Trayectoria real");
 xlabel("Y (m)");
 ylabel("X (m)");
 set(gca,'fontsize', 12);
-ylim([0.5, 7.5]);
+%ylim([0.5, 7.5]);
