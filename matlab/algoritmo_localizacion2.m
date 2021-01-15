@@ -36,19 +36,19 @@ clc, clear
     % Inicialización de matriz R 
     Rk = [var_ang 0 0;
           0 var_ang 0;
-          0 0 var_ang];
+          0 0 var_dist];
 
     % Posición de las balizas:
     LM_xy = [ -3.9 -3.0;    % LM1
                4.0  7.9;   % LM2
                4.0 -7.9;   % LM3
-               4.0  0.1;   % LM4
+               4.0  0.3;   % LM4
                4.0 -0.1;   % LM5
               -3.9  7.9;   % LM6
               -3.9 -7.9;   % LM7
               -3.9  3.0;   % LM8
                7.9 -0.1;   % LM9
-               7.9  0.1];  % LM10
+               7.9  0.3];  % LM10
               
     
 % Algoritmo
@@ -68,10 +68,9 @@ for i = 1:500
     % Detección de balizas
     laser = apoloGetLaserLandMarks('LMS100');
     num_balizas = length(laser.id); % numero de balizas detectadas
-    if num_balizas > 2 % Aplicar filtro cuando se detecten 3 balizas mínimo
+    if num_balizas > 1 % Aplicar filtro cuando se detecten 2 balizas mínimo                
         % Nuevo ciclo: k-1 = k
             Xk_1 = Xk;
-            % Xk_1 = X_k;
             Pk_1 = Pk;
         
         % Etapa 1: Predicción
@@ -91,61 +90,59 @@ for i = 1:500
                   (sin(Xk_1(3)+giro/2)) (0.5*avance*cos(Xk_1(3)+giro/2));
                    0 1];
             P_k = Ak*Pk_1*((Ak)') + Bk*Qk*((Bk)');
-                
-            % De la Medida
-            Dx1=LM_xy(laser.id(1),1)-X_k(1);
-            Dy1=LM_xy(laser.id(1),2)-X_k(2);
+        % De la Medida
+        Dx1=LM_xy(laser.id(1),1)-X_k(1);
+        Dy1=LM_xy(laser.id(1),2)-X_k(2);
+        Dx2=LM_xy(laser.id(2),1)-X_k(1);
+        Dy2=LM_xy(laser.id(2),2)-X_k(2);
+        Fsin=sin(atan2(Dy2,Dx2));
+        Fcos=cos(atan2(Dy2,Dx2));
+        Fatan=1/(1+(Dy2/Dx2)^2);
 
-            Dx2=LM_xy(laser.id(2),1)-X_k(1);
-            Dy2=LM_xy(laser.id(2),2)-X_k(2);
-            
-           
-            Fsin=sin(atan2(Dy2,Dx2));
-            Fcos=cos(atan2(Dy2,Dx2));
-            Fatan=1/(1+(Dy2/Dx2)^2);
-            
-            Zk_ = [atan2(Dy1,Dx1)-X_k(3);
-                   atan2(Dy2,Dx2)-X_k(3);
-                   Dy2/Fsin];
-            
-               
+        Zk_ = [atan2(Dy1,Dx1)-X_k(3);
+               atan2(Dy2,Dx2)-X_k(3);
+               Dy2/Fsin];
+
+
         % Etapa 2: Observación
         Zk = [laser.angle(1);
               laser.angle(2);
               laser.distance(2)];
-         
+
         Hk = [((Dy1)/((Dx1)^2+(Dy1)^2)) (-(Dx1)/((Dx1)^2+(Dy1)^2)) (-1);
               ((Dy2)/((Dx2)^2+(Dy2)^2)) (-(Dx2)/((Dx2)^2+(Dy2)^2)) (-1);   
               ((-Dy2)*(Fcos)*Fatan*(Dy2/(Dx2^2))/Fsin^2) (((-Fsin)-(Dy2*(Fcos)*Fatan*(-1/Dx2)))/Fsin^2) (0) ];
+
         % Etapa 3: Comparación de la predicción con observación
         Yk = Zk-Zk_;
-        for r=1:3
-            if Yk(r)>pi
-                Yk(r) = Yk(r) - 2*pi;
+           for r=1:3
+                if Yk(r)>pi
+                    Yk(r) = Yk(r) - 2*pi;
+                end
+                if Yk(r)<(-pi)
+                    Yk(r) = Yk(r) + 2*pi;
+                end
             end
-            if Yk(r)<(-pi)
-                Yk(r) = Yk(r) + 2*pi;
-            end
-        end
-        Sk = Hk*P_k*((Hk)') + Rk;
-        Wk = P_k*((Hk)')*inv(Sk);
-        
-        % Etapa 4: Correccion
-        Xk = X_k + Wk*Yk;
-        Pk = (eye(3)-Wk*Hk)*P_k;
-        
+            Sk = Hk*P_k*((Hk)') + Rk;
+            Wk = P_k*((Hk)')*inv(Sk);
+            
+            % Etapa 4: Correccion
+            Xk = X_k + Wk*Yk;
+            Pk = (eye(3)-Wk*Hk)*P_k;
+   
         apoloResetOdometry('Pioneer3AT', [Xk(1) Xk(2) Xk(3)]);
-        
+
+                
         %Xestimado(i,:) = X_k;
         Xestimado(i,:) = Xk;
-        
-%         plot(Xestimado(:,1), Xestimado(:,2),'+');
-%         xlim([-8 8]);
-%         ylim([-8 8]);
-        
-       
+                
+%       plot(Xestimado(:,1), Xestimado(:,2),'+');
+%       xlim([-8 8]);
+%       ylim([-8 8]);
+        Pacumulado(1,i) = Pk(1,1);
+        Pacumulado(2,i) = Pk(2,2);
+        Pacumulado(3,i) = Pk(3,3);
     end
-    
 end
 
 figure;
@@ -155,8 +152,64 @@ xlabel('X (m)')
 ylabel('Y (m)')
 hold on;
 plot(Xestimado(:,1),Xestimado(:,2),'r')
-legend('Posicion real (azul)','Posicion estimada (rojo)')
+% legend('Posicion real (azul)','Posicion estimada (rojo)')
 
+
+
+figure(1);
+subplot(2,2,1);
+plot(Xreal(:,1),Xreal(:,2),'.b','MarkerSize',2);
+xlabel('X (m)');
+ylabel('Y (m)');
+hold on;
+plot(Xestimado(:,1),Xestimado(:,2),'.r','MarkerSize',2);
+% legend('Posicion real','Posicion estimada');
+
+subplot(2,2,2);
+plot(Xreal(:,1),'.b','MarkerSize',2);
+xlabel ('t (muestras)');
+ylabel ('X (m)');
+hold on;
+plot(Xestimado(:,1),'.r','MarkerSize',2);
+% legend('Posicion real','Posicion estimada');
+
+subplot(2,2,3);
+plot(Xreal(:,2),'.b','MarkerSize',2);
+xlabel ('t (muestras)');
+ylabel ('Y (m)');
+hold on;
+plot(Xestimado(:,2),'.r','MarkerSize',2);
+% legend('Posicion real','Posicion estimada');
+
+subplot(2,2,4);
+plot(Xreal(:,3),'.b','MarkerSize',2);
+xlabel ('t (muestras)');
+ylabel ('\theta (rad)');
+hold on;
+plot(Xestimado(:,3),'.r','MarkerSize',2);
+% legend('Posicion real','Posicion estimada');
+
+
+
+figure(2);
+subplot(3,1,1);
+axis([0 12 0 9])
+plot(Pacumulado(1,:),'b','MarkerSize',2);
+xlabel ('t (muestras)')
+ylabel ('Varianza X (m2)')
+hold on
+
+subplot(3,1,2);
+axis([0 12 0 9])
+plot(Pacumulado(2,:),'b');
+xlabel ('t (muestras)')
+ylabel ('Varianza Y (m2)')
+
+subplot(3,1,3);
+axis([0 12 0 9])
+plot(Pacumulado(3,:),'b');
+xlabel ('t (muestras)')
+ylabel ('Varianza \theta (rad2)')
 % figure;
 % plot(Xreal(1,:),'b');
 % hold on
