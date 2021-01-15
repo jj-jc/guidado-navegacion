@@ -5,8 +5,8 @@ clear
 % Posición inicial
 
 %Puntos Simulacion 1
-%x_ini = 6.5; y_ini = -2.7; theta_ini = pi;
-%x_fin = 6.5; y_fin = 2.7; theta_fin = pi/2;
+x_ini = 6.5; y_ini = -2.7; theta_ini = pi;
+x_fin = 6.5; y_fin = 2.7; theta_fin = pi/2;
 
 %Puntos Simulacion 2
 %x_ini = 6.5; y_ini = 2.7; theta_ini = pi;
@@ -17,8 +17,8 @@ clear
 %x_fin = 6.5; y_fin = -2.7; theta_fin = 0;
 
 %Puntos Simulacion 4
-x_ini = -6.5; y_ini = -6.5; theta_ini = 0;
-x_fin = -6.5; y_fin = 6.5; theta_fin = pi;
+%x_ini = -6.5; y_ini = -6.5; theta_ini = 0;
+%x_fin = -6.5; y_fin = 6.5; theta_fin = pi;
 
 apoloPlaceMRobot('Pioneer3AT',[x_ini y_ini 0],theta_ini);
 apoloUpdate();
@@ -107,9 +107,9 @@ distanceError = norm(planTray(1,:) - planTray(end,:));
 i = 1;
 %Hasta que no se llegue al destino, se ejecuta el controlador
 figure;
-%pause(10);
+pause(10);
 while(distanceError > maxError)
-    %pause(0.02)
+    pause(0.02)
     %Estimación de la pose con el filtro de Kalman
     Xk_1=Xk;
     Pk_1=Pk;
