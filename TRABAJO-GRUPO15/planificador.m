@@ -40,7 +40,7 @@ ss.StateBounds = [map.XWorldLimits;map.YWorldLimits; [-pi pi]];
 planner = plannerRRT(ss,sv);   
 
 %Se establece la distancia máxima entre dos nodos del árbol
-planner.MaxConnectionDistance = 0.2;
+planner.MaxConnectionDistance = 0.5;
 planner.GoalReachedFcn = @maxErrorPlanner;
 
 %Se genera la trayectoria utilizando el algoritmo RRT

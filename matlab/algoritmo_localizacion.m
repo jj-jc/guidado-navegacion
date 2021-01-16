@@ -117,8 +117,8 @@ for i = 1:500
                 Yk(r) = Yk(r) + 2*pi;
             end
         end
-        Sk = Hk*P_k*((Hk)') + Rk;
-        Wk = P_k*((Hk)')*inv(Sk);
+        Sk = Hk*P_k*((Hk)') + Rk
+        Wk = P_k*((Hk)')*inv(Sk)
         
         % Etapa 4: Correccion
         Xk = X_k + Wk*Yk;
