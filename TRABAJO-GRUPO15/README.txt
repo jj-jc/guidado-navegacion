@@ -1,4 +1,10 @@
 
+Autores (Grupo 15):
+
+	Álvaro Benito Oliva
+	Germán Andrés Di Fonzo Caturegli
+	Juan José Jurado Camino
+
 	1) Código para calibración:
 		- Incertidumbre_Sensores.m
 		- Incertidumbre_Odometria.m
